@@ -41,26 +41,27 @@ public class City {
 	}
 	
 	public void setProduction(){
-		//not done
+		// need a try catch for when a city is at the edge of the map.
 		int total = location.getYieldProduction();
-		total = total + location.getNorth().getYieldProduction();
-		total = total + location.getNorth().getNorth().getYieldProduction();
-		total = total + location.getNorth().getNorthEast().getYieldProduction();
-		total = total + location.getNorthEast().getYieldProduction();
-		total = total + location.getNorthEast().getNorthEast().getYieldProduction();
-		total = total + location.getNorthEast().getSouthEast().getYieldProduction();
-		total = total + location.getSouthEast().getYieldProduction();
-		total = total + location.getSouthEast().getSouthEast().getYieldProduction();
-		total = total + location.getSouthEast().getSouth().getYieldProduction();
-		total = total + location.getSouth().getYieldProduction();
-		total = total + location.getSouth().getSouth().getYieldProduction();
-		total = total + location.getSouth().getSouthWest().getYieldProduction();
-		total = total + location.getSouthWest().getYieldProduction();
-		total = total + location.getSouthWest().getSouthWest().getYieldProduction();
-		total = total + location.getSouthWest().getNorthWest().getYieldProduction();
-		total = total + location.getNorthWest().getYieldProduction();
-		total = total + location.getNorthWest().getNorthWest().getYieldProduction();
-		total = total + location.getNorthWest().getNorth().getYieldProduction();
+		total = total + location.getNorth().getYieldProduction()
+				+ location.getNorth().getNorth().getYieldProduction()
+				+ location.getNorth().getNorthEast().getYieldProduction();
+		total = total + location.getNorthEast().getYieldProduction()
+				+ location.getNorthEast().getNorthEast().getYieldProduction()
+				+ location.getNorthEast().getSouthEast().getYieldProduction();
+		total = total + location.getSouthEast().getYieldProduction()
+				+ location.getSouthEast().getSouthEast().getYieldProduction()
+				+ location.getSouthEast().getSouth().getYieldProduction();
+		total = total + location.getSouth().getYieldProduction()
+				+ location.getSouth().getSouth().getYieldProduction()
+				+ location.getSouth().getSouthWest().getYieldProduction();
+		total = total + location.getSouthWest().getYieldProduction()
+				+ location.getSouthWest().getSouthWest().getYieldProduction()
+				+ location.getSouthWest().getNorthWest().getYieldProduction();
+		total = total + location.getNorthWest().getYieldProduction()
+				+ location.getNorthWest().getNorthWest().getYieldProduction()
+				+ location.getNorthWest().getNorth().getYieldProduction();
+
 		production = total;
 	}
 	public int getProduction(){
@@ -68,24 +69,24 @@ public class City {
 	}
 	public void setFood(){
 		int total = location.getYieldProduction();
-		total = total + location.getNorth().getYieldFood();
-		total = total + location.getNorth().getNorth().getYieldFood();
-		total = total + location.getNorth().getNorthEast().getYieldFood();
-		total = total + location.getNorthEast().getYieldFood();
-		total = total + location.getNorthEast().getNorthEast().getYieldFood();
-		total = total + location.getNorthEast().getSouthEast().getYieldFood();
-		total = total + location.getSouthEast().getYieldFood();
-		total = total + location.getSouthEast().getSouthEast().getYieldFood();
-		total = total + location.getSouthEast().getSouth().getYieldFood();
-		total = total + location.getSouth().getYieldFood();
-		total = total + location.getSouth().getSouth().getYieldFood();
-		total = total + location.getSouth().getSouthWest().getYieldFood();
-		total = total + location.getSouthWest().getYieldFood();
-		total = total + location.getSouthWest().getSouthWest().getYieldFood();
-		total = total + location.getSouthWest().getNorthWest().getYieldFood();
-		total = total + location.getNorthWest().getYieldFood();
-		total = total + location.getNorthWest().getNorthWest().getYieldFood();
-		total = total + location.getNorthWest().getNorth().getYieldFood();
+		total = total + location.getNorth().getYieldFood()
+				+ location.getNorth().getNorthEast().getYieldFood()
+				+ location.getNorth().getNorth().getYieldFood();
+		total = total + location.getNorthEast().getYieldFood() 
+				+ location.getNorthEast().getNorthEast().getYieldFood()
+				+ location.getNorthEast().getSouthEast().getYieldFood();
+		total = total + location.getSouthEast().getYieldFood() 
+				+ location.getSouthEast().getSouthEast().getYieldFood()
+				+ location.getSouthEast().getSouth().getYieldFood();
+		total = total + location.getSouth().getYieldFood()
+				+ location.getSouth().getSouth().getYieldFood()
+				+ location.getSouth().getSouthWest().getYieldFood();
+		total = total + location.getSouthWest().getYieldFood()
+				+ location.getSouthWest().getSouthWest().getYieldFood()
+				+ location.getSouthWest().getNorthWest().getYieldFood();
+		total = total + location.getNorthWest().getYieldFood()
+				+ location.getNorthWest().getNorthWest().getYieldFood()
+				+ location.getNorthWest().getNorth().getYieldFood();
 		food = total;
 	}
 	public int getFood(){

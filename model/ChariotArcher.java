@@ -2,7 +2,7 @@ package model;
 
 public class ChariotArcher extends Unit{
 	
-	public ChariotArcher(Player player,int x,int y){
+	public ChariotArcher(Player player,Cell place){
 		super.attack = 40;
 		super.defence = 15;
 		super.health = 60;
@@ -14,8 +14,7 @@ public class ChariotArcher extends Unit{
 		super.canMove = true;
 		super.produceCost = 40;
 		super.player = player;
-		super.cellX = x;
-		super.cellY = y;
+		super.location = place;
 		
 	}
 

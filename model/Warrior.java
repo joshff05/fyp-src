@@ -2,7 +2,7 @@ package model;
 
 public class Warrior extends Unit {
 
-	public Warrior(Player player,int x,int y){
+	public Warrior(Player player,Cell place){
 		super.attack = 30;
 		super.defence = 20;
 		super.health = 60;
@@ -14,8 +14,7 @@ public class Warrior extends Unit {
 		super.canMove = true;
 		super.produceCost = 30;
 		super.player = player;
-		super.cellX = x;
-		super.cellY = y;
+		super.location = place;
 		
 	}
 }

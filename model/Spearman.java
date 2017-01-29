@@ -2,7 +2,7 @@ package model;
 
 public class Spearman extends Unit {
 
-	public Spearman(Player player,int x,int y){
+	public Spearman(Player player,Cell place){
 		super.attack = 35;
 		super.defence = 25;
 		super.health = 60;
@@ -14,8 +14,7 @@ public class Spearman extends Unit {
 		super.canMove = true;
 		super.produceCost = 50;
 		super.player = player;
-		super.cellX = x;
-		super.cellY = y;
+		super.location = place;
 		
 		//bonus vs knights
 		

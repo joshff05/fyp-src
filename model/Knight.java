@@ -2,7 +2,7 @@ package model;
 
 public class Knight extends Unit {
 
-	public Knight(Player player,int x,int y){
+	public Knight(Player player,Cell place){
 		super.attack = 40;
 		super.defence = 15;
 		super.health = 60;
@@ -14,8 +14,7 @@ public class Knight extends Unit {
 		super.canMove = true;
 		super.produceCost = 60;
 		super.player = player;
-		super.cellX = x;
-		super.cellY = y;
+		super.location = place;
 		
 		
 	}

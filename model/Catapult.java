@@ -2,7 +2,7 @@ package model;
 
 public class Catapult extends Unit{
 	
-	public Catapult(Player player,int x,int y){
+	public Catapult(Player player,Cell place){
 		super.attack = 35;
 		super.defence = 10;
 		super.health = 30;
@@ -14,8 +14,7 @@ public class Catapult extends Unit{
 		super.canMove = true;
 		super.produceCost = 60;
 		super.player = player;
-		super.cellX = x;
-		super.cellY = y;
+		super.location = place;
 		
 	}
 	

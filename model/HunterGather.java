@@ -2,7 +2,7 @@ package model;
 
 public class HunterGather extends Unit {
 	
-	public HunterGather(Player player,int x,int y){
+	public HunterGather(Player player,Cell place){
 		super.attack = 1;
 		super.defence = 10;
 		super.health = 20;
@@ -14,8 +14,7 @@ public class HunterGather extends Unit {
 		super.canMove = true;
 		super.produceCost = 40;
 		super.player = player;
-		super.cellX = x;
-		super.cellY = y;
+		super.location = place;
 		
 	}
 	

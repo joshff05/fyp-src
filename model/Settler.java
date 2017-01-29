@@ -2,7 +2,7 @@ package model;
 
 public class Settler extends Unit {
 	
-	public Settler(Player player,int x,int y){
+	public Settler(Player player,Cell place){
 		super.attack = 1;
 		super.defence = 10;
 		super.health = 20;
@@ -14,13 +14,13 @@ public class Settler extends Unit {
 		super.canMove = true;
 		super.produceCost = 50;
 		super.player = player;
-		super.cellX = x;
-		super.cellY = y;
+		super.location = place;
 		
 	}
 	
 	public void foundCity(String cityName){
-		City city = new City(cityName,player,cellX,cellY);
+		City city = new City(cityName,player,location);
+		location.setHeldObject(city);
 	}
 
 }

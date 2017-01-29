@@ -2,7 +2,7 @@ package model;
 
 public class Archer extends Unit {
 
-	public Archer(Player player,int x,int y){
+	public Archer(Player player,Cell place){
 		super.attack = 30;
 		super.defence = 15;
 		super.health = 60;
@@ -14,8 +14,7 @@ public class Archer extends Unit {
 		super.canMove = true;
 		super.produceCost = 30;
 		super.player = player;
-		super.cellX = x;
-		super.cellY = y;
+		super.location = place;
 		
 	}
 }
