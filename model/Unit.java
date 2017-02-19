@@ -20,7 +20,7 @@ public class Unit {
 	//need to get cells instead of x and y values
 	
 	//add mountain detection for all, add getlocation for units
-	protected void moveUnit(String direction){
+	public void moveUnit(String direction){
 		if(canMove = true){
 			Cell current = location;
 			if(direction == "north"){
