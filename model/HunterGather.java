@@ -12,9 +12,11 @@ public class HunterGather extends Unit {
 		super.melee = true;
 		super.taxCost = 0;
 		super.canMove = true;
-		super.produceCost = 40;
+		//produceCost = 40;
 		super.player = player;
 		super.location = place;
+		super.type = "huntergather";
+		location.setHeldObject(this);
 		
 	}
 	

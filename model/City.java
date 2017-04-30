@@ -6,16 +6,21 @@ public class City {
 	private int defence;
 	private int health;
 	private int population;
-	private int production;
-	private int food;
-	private int goldPerTurn;
-	private int range;
+	private int maxPopulation = 19;
+	private int totalProduction;
+	private int productionBank;
+	private int productionPerPopulation;
+	private int totalFood;
+	private int foodBank;
+	private int foodPerPopulation;
+	private int foodDemand;
+	private int goldPerTurn;//may not use
 	private Player player;
-	private boolean canAttack;
 	private Cell location;
 	private Building [] buildingInCity;
 	private Object [] productionQueue;
 	private Object [] possibleBuildings;
+	public String type;
 	
 	public City(String cityName,Player player,Cell location){
 		this.name = cityName;
@@ -24,12 +29,13 @@ public class City {
 		this.health = 300;
 		this.population = 1;
 		this.goldPerTurn = 2;
-		this.range = 3;
 		this.player = player;
-		this.canAttack = true;
 		this.location = location;
+		this.foodDemand = 10;
 		setProduction();
 		setFood();
+		setconsumablesPerPop();
+		this.type = "City";
 	}
 	
 	public void borderSet(){
@@ -38,59 +44,236 @@ public class City {
 	
 	public void productionQueue(){
 		//not done yet
+		//change amount based on build cost
+	}
+	//checked at the end of everyturn
+	public void updatePopulation(){
+		if(foodBank >= foodDemand){
+			population++;
+			foodBank = foodBank - foodDemand;
+			foodDemand = (int) (foodDemand * 1.5);
+			setconsumablesPerPop();
+		}
+	}
+	
+	public void addTofoodBank(){
+		foodBank = foodBank + foodPerPopulation;
+	}
+	
+	public void addToProdBank(){
+		productionBank = productionBank + productionPerPopulation;
+	}
+	
+	public void subtractProdBank(int value){
+		productionBank = productionBank - value;
+	}
+	
+	public void setconsumablesPerPop(){
+		productionPerPopulation = (totalProduction / maxPopulation) * population;
+		if(productionPerPopulation < 1){
+			productionPerPopulation = 1;
+		}
+		foodPerPopulation = (totalFood/maxPopulation) * population;
+		if(foodPerPopulation <1){
+			foodPerPopulation = 1;
+		}
 	}
 	
 	public void setProduction(){
 		// need a try catch for when a city is at the edge of the map.
 		int total = location.getYieldProduction();
-		total = total + location.getNorth().getYieldProduction()
-				+ location.getNorth().getNorth().getYieldProduction()
-				+ location.getNorth().getNorthEast().getYieldProduction();
-		total = total + location.getNorthEast().getYieldProduction()
-				+ location.getNorthEast().getNorthEast().getYieldProduction()
-				+ location.getNorthEast().getSouthEast().getYieldProduction();
-		total = total + location.getSouthEast().getYieldProduction()
-				+ location.getSouthEast().getSouthEast().getYieldProduction()
-				+ location.getSouthEast().getSouth().getYieldProduction();
-		total = total + location.getSouth().getYieldProduction()
-				+ location.getSouth().getSouth().getYieldProduction()
-				+ location.getSouth().getSouthWest().getYieldProduction();
-		total = total + location.getSouthWest().getYieldProduction()
-				+ location.getSouthWest().getSouthWest().getYieldProduction()
-				+ location.getSouthWest().getNorthWest().getYieldProduction();
-		total = total + location.getNorthWest().getYieldProduction()
-				+ location.getNorthWest().getNorthWest().getYieldProduction()
-				+ location.getNorthWest().getNorth().getYieldProduction();
+		try {
+			total = total + location.getNorth().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorth().getNorth().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorth().getNorthEast().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorthEast().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorthEast().getNorthEast().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorthEast().getSouthEast().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouthEast().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouthEast().getSouthEast().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouthEast().getSouth().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouth().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouth().getSouth().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouth().getSouthWest().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouthWest().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch bloc
+		}
+		try {
+			total = total + location.getSouthWest().getSouthWest().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouthWest().getNorthWest().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorthWest().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorthWest().getNorthWest().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorthWest().getNorth().getYieldProduction();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
 
-		production = total;
+		totalProduction = total;
 	}
 	public int getProduction(){
-		return production;
+		return totalProduction;
 	}
 	public void setFood(){
 		int total = location.getYieldProduction();
-		total = total + location.getNorth().getYieldFood()
-				+ location.getNorth().getNorthEast().getYieldFood()
-				+ location.getNorth().getNorth().getYieldFood();
-		total = total + location.getNorthEast().getYieldFood() 
-				+ location.getNorthEast().getNorthEast().getYieldFood()
-				+ location.getNorthEast().getSouthEast().getYieldFood();
-		total = total + location.getSouthEast().getYieldFood() 
-				+ location.getSouthEast().getSouthEast().getYieldFood()
-				+ location.getSouthEast().getSouth().getYieldFood();
-		total = total + location.getSouth().getYieldFood()
-				+ location.getSouth().getSouth().getYieldFood()
-				+ location.getSouth().getSouthWest().getYieldFood();
-		total = total + location.getSouthWest().getYieldFood()
-				+ location.getSouthWest().getSouthWest().getYieldFood()
-				+ location.getSouthWest().getNorthWest().getYieldFood();
-		total = total + location.getNorthWest().getYieldFood()
-				+ location.getNorthWest().getNorthWest().getYieldFood()
-				+ location.getNorthWest().getNorth().getYieldFood();
-		food = total;
+		try {
+			total = total + location.getNorth().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorth().getNorthEast().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorth().getNorth().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorthEast().getYieldFood() ;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorthEast().getNorthEast().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorthEast().getSouthEast().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouthEast().getYieldFood() ;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouthEast().getSouthEast().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouthEast().getSouth().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouth().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouth().getSouth().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouth().getSouthWest().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouthWest().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouthWest().getSouthWest().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getSouthWest().getNorthWest().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorthWest().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorthWest().getNorthWest().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		try {
+			total = total + location.getNorthWest().getNorth().getYieldFood();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		totalFood = total;
 	}
 	public int getFood(){
-		return food;
+		return totalFood;
 	}
 	
 	public void setPopulation(){
@@ -115,6 +298,19 @@ public class City {
 
 	public void setHealth(int health) {
 		this.health = health;
+	}
+	public String getType(){
+		return type;
+	}
+	
+	public Player getPlayer(){
+		return player;
+	}
+	public int getProductionBank(){
+		return productionBank;
+	}
+	public int getPopulation(){
+		return population;
 	}
 
 }

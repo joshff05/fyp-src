@@ -113,78 +113,73 @@ Calls: hex()
 Purpose: This function draws a hexagon based on the initial point (x,y).
 The hexagon is drawn in the colour specified in hexgame.COLOURELL.
 	 *********************************************************************/
-	public static void drawHex(int i, int j, Graphics2D g2, String terrain, String resource) {
+	public static void drawHex(int i, int j, Graphics2D g2, String terrain, String resource, String heldObject) {
 		int x = i * (s+t);
 		int y = j * h + (i%2) * h/2;
 		Polygon poly = hex(x,y);
-
-		switch(terrain){
-		case "grassland":g2.setColor(Color.GREEN);break;
-		case "forest":g2.setColor(Color.RED);break;
-		case "hills":g2.setColor(Color.PINK);break;
-		case "dessert":g2.setColor(Color.YELLOW);break;
-		case "mountain":g2.setColor(Color.GRAY);break;
-		//		case "grassland":
-		//			//g2.setClip(poly);
-		//			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/grassland1.jpg")).getImage(), x, y, Color.GREEN, null);break;
-		//		case "forest" :
-		//			//g2.setClip(poly);
-		//			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/forest1.jpg")).getImage(), x, y, Color.GREEN, null);break;
-		//		case "hills" :
-		//			//g2.setClip(poly);
-		//			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/grassland_hills1.jpg")).getImage(), x, y, Color.GREEN, null);break;
-		//		case "dessert" : 
-		//			//g2.setClip(poly);
-		//			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/desert1.jpg")).getImage(), x, y, Color.GREEN, null);break;
-		//		case"mountain" :
-		//			//g2.setClip(poly);
-		//			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/mountains1.jpg")).getImage(), x, y, Color.GREEN, null);break;
-		default: g2.setColor(Color.BLACK);break;
-		}
 		
-		
-		//g2.setColor(Color.blue);
-		//add in image of terrain/find terrain
-		//g2.fillPolygon(hexmech.hex(x,y));
 		g2.fillPolygon(poly);
 		switch(terrain){
 		case "grassland":
 			g2.setClip(poly);
-			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/grassland1.jpg")).getImage(), x, y, Color.GREEN, null);break;
+			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/grassland1.jpg")).getImage(), x, y, Color.GREEN, null);break;
 		case "forest" :
 			g2.setClip(poly);
-			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/forest1.jpg")).getImage(), x, y, Color.GREEN, null);break;
+			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/forest1.jpg")).getImage(), x, y, Color.GREEN, null);break;
 		case "hills" :
 			g2.setClip(poly);
-			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/grassland_hills1.jpg")).getImage(), x, y, Color.GREEN, null);break;
+			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/grassland_hills1.jpg")).getImage(), x, y, Color.GREEN, null);break;
 		case "dessert" : 
 			g2.setClip(poly);
-			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/desert1.jpg")).getImage(), x, y, Color.GREEN, null);break;
+			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/desert1.jpg")).getImage(), x, y, Color.GREEN, null);break;
 		case"mountain" :
 			g2.setClip(poly);
-			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/mountains1.jpg")).getImage(), x, y, Color.GREEN, null);break;
+			g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/mountains1.jpg")).getImage(), x, y, Color.GREEN, null);break;
 		default: g2.setColor(Color.BLACK);break;
 		}
 		
 		if (resource != null){
 			switch(resource){
 			case "copper" :
-				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/Copper_tube-icon.png")).getImage(), x + 35, y +10, null);break;
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/Copper_tube-icon.png")).getImage(), x + 30, y +11, null);break;
 			case "coal" :
-				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/coal-icon.png")).getImage(), x + 35, y +10, null);break;
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/coal-icon.png")).getImage(), x + 30, y +11, null);break;
 			case "stone":
-				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/Stone-icon.png")).getImage(), x + 35, y +10, null);break;
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/Stone-icon.png")).getImage(), x + 32, y +11, null);break;
 			case "iron" :
-				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/Iron-icon.png")).getImage(), x + 35, y +10, null);break;
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/Iron-icon.png")).getImage(), x + 32, y +11, null);break;
 			case "citrus" :
-				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/orange-icon.png")).getImage(), x + 35, y +10, null);break;
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/orange-icon.png")).getImage(), x + 32, y +11, null);break;
 			case "cows" :
-				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/bull-icon.png")).getImage(), x + 35, y +10, null);break;
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/bull-icon.png")).getImage(), x + 31, y +15, null);break;
 			case "sheep":
-				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/sheep.png")).getImage(), x + 35, y +10, null);break;
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/sheep.png")).getImage(), x + 32, y +11, null);break;
 			case "pigs" :
-				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/tileimage/pig-icon.png")).getImage(), x + 35, y +10, null);break;
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/pig-icon.png")).getImage(), x + 32, y +11, null);break;
 			default : break;
+			}
+		}
+		
+		if(heldObject != null){
+			switch(heldObject){
+			case "City" :
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/city_icon.png")).getImage(), x + 32, y + 35, null);break; //add picture//add color based on player number
+			case "settler" :
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/Settler_icon.png")).getImage(), x + 32, y + 35, null);break;
+			case "archer" : 
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/archer-icon.png")).getImage(), x + 32, y + 35, null);break;
+			case "catapult" :
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/catapult.png")).getImage(), x + 32, y + 35, null);break;
+			case "chariotarcher" :
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/chariot.png")).getImage(), x + 32, y + 35, null);break;
+			case "huntergather" :
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/hunter.png")).getImage(), x + 32, y + 35, null);break;
+			case "knight" :
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/knight.png")).getImage(), x + 32, y + 35, null);break;
+			case "spearman" :
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/spearman.png")).getImage(), x + 32, y + 35, null);break;
+			case "warrior" :
+				g2.drawImage(new ImageIcon(g2.getClass().getResource("/view/warrior.png")).getImage(), x + 32, y + 35, null);break;
 			}
 		}
 		

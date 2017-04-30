@@ -12,9 +12,11 @@ public class Warrior extends Unit {
 		super.melee = true;
 		super.taxCost = 1;
 		super.canMove = true;
-		super.produceCost = 30;
+		//produceCost = 30;
 		super.player = player;
 		super.location = place;
+		super.type = "warrior";
+		location.setHeldObject(this);
 		
 	}
 }

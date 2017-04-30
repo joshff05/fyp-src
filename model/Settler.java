@@ -12,15 +12,19 @@ public class Settler extends Unit {
 		super.melee = true;
 		super.taxCost = 0;
 		super.canMove = true;
-		super.produceCost = 50;
+		//produceCost = 50;
 		super.player = player;
 		super.location = place;
+		super.type = "settler";
+		location.setHeldObject(this);
 		
 	}
 	
 	public void foundCity(String cityName){
 		City city = new City(cityName,player,location);
 		location.setHeldObject(city);
+		player.removeUnit(this);
+		player.addCity(city);
 	}
 
 }

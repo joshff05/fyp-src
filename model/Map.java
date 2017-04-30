@@ -9,34 +9,15 @@ public class Map {
 	private Random rand;
 
 	public Map(){
-		mapBoard = new Cell [32][25];
+		mapBoard = new Cell [32][19];
 		resourceArray = new String [8];
 		terrainArray = new String [5];
-		rand = new Random(102343);
+		rand = new Random();
 		//seed that fails cause of movement onto a mountain tile is restricted: 102216
-		//seed that works 													  : 102343
+		//seed that works 													  : 150009
 		resources();
 		terrain();
 	}
-	
-
-//	public static void main(String[] args){
-//		Map game = new Map();
-//		Player dan = new Player();
-//		game.fillMap();
-//		Settler dan1 = new Settler(dan,game.mapBoard[5][5]);
-//		dan1.moveUnit("north");
-//		dan1.foundCity("cambridge");
-//		System.out.println(game.toStringMap());
-//		System.out.println(game.mapBoard[5][5].getTerrain() + "," + game.mapBoard[0][0].getResource());
-//		System.out.println("food:" + game.mapBoard[5][5].getYieldFood());
-//		System.out.println("production:" + game.mapBoard[5][5].getYieldProduction());
-//		System.out.println("north: " + game.mapBoard[5][5].getNorth().getRow()+ "," + game.mapBoard[5][5].getNorth().getColumn());
-//		System.out.println("south East: " + game.mapBoard[5][5].getSouthEast().getRow()+ "," + game.mapBoard[5][5].getSouthEast().getColumn());
-//		System.out.println("held object: " + ((City) game.mapBoard[4][5].getHeldObject()).getName());
-//		System.out.println("production: " +  ((City) game.mapBoard[4][5].getHeldObject()).getProduction());
-//		System.out.println("food: " + ((City) game.mapBoard[4][5].getHeldObject()).getFood());
-//	}
 	
 
 	private void resources(){
@@ -62,7 +43,7 @@ public class Map {
 			for (int column = 0; column < mapBoard[row].length ; column++){
 				Cell tile = new Cell(row,column);
 				int valueTerrian = rand.nextInt(5);
-				int valuePossible = rand.nextInt(20);
+				int valuePossible = rand.nextInt(15);
 				int valueResource = rand.nextInt(8);
 
 				switch (valueTerrian){
@@ -94,12 +75,6 @@ public class Map {
 		}
 		for (int row = 0;row < mapBoard.length ; row++){
 			for (int column = 0; column < mapBoard[row].length ; column++){
-//				mapBoard[row][column].setNorth(row, column);
-//				mapBoard[row][column].setNorthEast(row, column);
-//				mapBoard[row][column].setNorthWest(row, column);
-//				mapBoard[row][column].setSouth(row, column);
-//				mapBoard[row][column].setSouthEast(row, column);
-//				mapBoard[row][column].setSouthWest(row, column);
 				northLogic(row, column);
 				southLogic(row, column);
 				northWestLogic(row, column);
@@ -144,58 +119,58 @@ public class Map {
 	}
 	
 	public void northLogic(int row,int column){
-		if(row == 0){
+		if(column == 0){
 			mapBoard[row][column].setNorth(null);
 		}
 		else { 
-			mapBoard[row][column].setNorth(mapBoard[row-1][column]);
+			mapBoard[row][column].setNorth(mapBoard[row][column-1]);
 			
 		}
 	}
 	public void southLogic(int row,int column){
-		if(row == 31){
+		if(column == 18){
 			mapBoard[row][column].setSouth(null);
 		}
 		else { 
-			mapBoard[row][column].setSouth(mapBoard[row+1][column]);
+			mapBoard[row][column].setSouth(mapBoard[row][column+1]);
 		}
 	}
 
 	public void northWestLogic(int row,int column){
-		if(column == 0 || (row == 0 && column%2 ==0)){
+		if(row == 0 || (column == 0 && row%2 ==0)){
 			mapBoard[row][column].setNorthWest(null);
-		}else if(column%2 == 0){
+		}else if(row%2 == 0){
 			mapBoard[row][column].setNorthWest(mapBoard[row-1][column-1]);
 		}else {
-			mapBoard[row][column].setNorthWest(mapBoard[row][column-1]);
+			mapBoard[row][column].setNorthWest(mapBoard[row-1][column]);
 		}
 	}
 
 	public void northEastLogic(int row,int column){
-		if(column == 24 || (row == 0 && column%2 ==0)){
+		if(row == 31 || (column == 0 && row%2 ==0)){
 			mapBoard[row][column].setNorthEast(null);
-		}else if(column%2 == 0){
-			mapBoard[row][column].setNorthEast(mapBoard[row-1][column+1]);
+		}else if(row%2 == 0){
+			mapBoard[row][column].setNorthEast(mapBoard[row+1][column-1]);
 		}else {
-			mapBoard[row][column].setNorthEast(mapBoard[row][column+1]);
+			mapBoard[row][column].setNorthEast(mapBoard[row+1][column]);
 		}
 	}
 
 	public void southWestLogic(int row,int column){
-		if(column == 0 || (row == 31 && column%2 == 1)){
+		if(row == 0 || (column == 18 && row%2 == 1)){
 			mapBoard[row][column].setSouthWest(null);
-		}else if(column%2 == 0){
-			mapBoard[row][column].setSouthWest(mapBoard[row][column-1]);
+		}else if(row%2 == 0){
+			mapBoard[row][column].setSouthWest(mapBoard[row-1][column]);
 		}else {
-			mapBoard[row][column].setSouthWest(mapBoard[row+1][column-1]);
+			mapBoard[row][column].setSouthWest(mapBoard[row-1][column+1]);
 		}
 	}
 
 	public void southEastLogic(int row,int column){
-		if(column == 24 || (row == 31 && column%2 == 1)){
+		if(row == 31 || (column == 18 && row%2 == 1)){
 			mapBoard[row][column].setSouthEast(null);
-		}else if(column%2 == 0){
-			mapBoard[row][column].setSouthEast(mapBoard[row][column+1]);
+		}else if(row%2 == 0){
+			mapBoard[row][column].setSouthEast(mapBoard[row+1][column]);
 		}else {
 			mapBoard[row][column].setSouthEast(mapBoard[row+1][column+1]);
 		}

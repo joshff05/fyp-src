@@ -12,9 +12,11 @@ public class ChariotArcher extends Unit{
 		super.melee = false;
 		super.taxCost = 1;
 		super.canMove = true;
-		super.produceCost = 40;
+		//produceCost = 40;
 		super.player = player;
 		super.location = place;
+		super.type = "chariotarcher";
+		location.setHeldObject(this);
 		
 	}
 

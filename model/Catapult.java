@@ -12,9 +12,11 @@ public class Catapult extends Unit{
 		super.melee = false;
 		super.taxCost = 1;
 		super.canMove = true;
-		super.produceCost = 60;
+		//produceCost = 60;
 		super.player = player;
 		super.location = place;
+		super.type = "catapult";
+		location.setHeldObject(this);
 		
 	}
 	

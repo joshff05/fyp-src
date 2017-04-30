@@ -17,15 +17,6 @@ public class Cell {
 	private Object heldObject;
 	
 
-	//add yields, cities/units to list.
-	//hopefully can use these for movements
-	//for start of game find resource and place settler within 2 of it. players should not share resource.
-	//linked list with nodes
-	//will be easier to retrieve cells and the yileds
-	//round in a clockwise direction. 
-	//set borders will allow to get city yields.
-	//"doubly" linked list
-	//hold an object
 	
 	public Cell(int row, int column){
 		this.row = row;

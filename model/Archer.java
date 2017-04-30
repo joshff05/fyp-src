@@ -12,9 +12,11 @@ public class Archer extends Unit {
 		super.melee = false;
 		super.taxCost = 1;
 		super.canMove = true;
-		super.produceCost = 30;
+		//produceCost = 30;
 		super.player = player;
 		super.location = place;
+		super.type = "archer";
+		location.setHeldObject(this);
 		
 	}
 }

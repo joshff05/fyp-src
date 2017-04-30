@@ -12,9 +12,11 @@ public class Spearman extends Unit {
 		super.melee = true;
 		super.taxCost = 1;
 		super.canMove = true;
-		super.produceCost = 50;
+		//produceCost = 50;
 		super.player = player;
 		super.location = place;
+		super.type = "spearman";
+		location.setHeldObject(this);
 		
 		//bonus vs knights
 		

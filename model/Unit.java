@@ -13,15 +13,20 @@ public class Unit {
 	protected int taxCost;
 	protected boolean canMove;
 	protected boolean canAttack;
-	protected int produceCost;
+	protected static int produceCost = 25;
 	protected Cell location;
-	//may need to change costs and stats for balance
-	//could a city be classed as a stationary unit.
-	//need to get cells instead of x and y values
+	protected String type;
+
+
 	
-	//add mountain detection for all, add getlocation for units
+	public void resetMovement(){
+		movementLeft = maxMovement;
+		canMove = true;
+	}
+	//decides where a unit needs to move and checks to see if it possible. 
+	//minuses movement and then checks to make sure that no more movements can happen that turn
 	public void moveUnit(String direction){
-		if(canMove = true){
+		if(canMove == true){
 			Cell current = location;
 			if(direction == "north"){
 				if(location.getNorth().getTerrain() != "mountain"){
@@ -34,53 +39,68 @@ public class Unit {
 				}
 			}
 			if(direction == "northEast"){
-				if(location.getNorthEast().getHeldObject() == null){
-					location.getNorthEast().setHeldObject(location.getHeldObject());
-					location = location.getNorthEast();
-					current.setHeldObject(null);
-					movementLeft=movementLeft - 1;
+				if(location.getNorthEast().getTerrain() != "mountain"){
+					if(location.getNorthEast().getHeldObject() == null){
+						location.getNorthEast().setHeldObject(location.getHeldObject());
+						location = location.getNorthEast();
+						current.setHeldObject(null);
+						movementLeft=movementLeft - 1;
+					}
 				}
 			}
 			if(direction == "southEast"){
-				if(location.getSouthEast().getHeldObject() == null){
-					location.getSouthEast().setHeldObject(location.getHeldObject());
-					location = location.getSouthEast();
-					current.setHeldObject(null);
-					movementLeft = movementLeft - 1;
+				if(location.getSouthEast().getTerrain() != "mountain"){
+					if(location.getSouthEast().getHeldObject() == null){
+						location.getSouthEast().setHeldObject(location.getHeldObject());
+						location = location.getSouthEast();
+						current.setHeldObject(null);
+						movementLeft = movementLeft - 1;
+					}
 				}
 			}
 			if(direction == "south"){
-				if(location.getSouth().getHeldObject() == null){
-					location.getSouthEast().setHeldObject(location.getHeldObject());
-					location = location.getSouth();
-					current.setHeldObject(null);
-					movementLeft = movementLeft - 1;
+				if(location.getSouth().getTerrain() != "mountain"){
+					if(location.getSouth().getHeldObject() == null){
+						location.getSouth().setHeldObject(location.getHeldObject());
+						location = location.getSouth();
+						current.setHeldObject(null);
+						movementLeft = movementLeft - 1;
+					}
 				}
 			}
 			if(direction == "southWest"){
-				if(location.getSouthWest().getHeldObject() == null){
-					location.getSouthWest().setHeldObject(location.getHeldObject());
-					location = location.getSouthWest();
-					current.setHeldObject(null);
-					movementLeft = movementLeft - 1;
+				if(location.getSouthWest().getTerrain() != "mountain"){
+					if(location.getSouthWest().getHeldObject() == null){
+						location.getSouthWest().setHeldObject(location.getHeldObject());
+						location = location.getSouthWest();
+						current.setHeldObject(null);
+						movementLeft = movementLeft - 1;
+					}
 				}
 			}
 			if(direction == "northWest"){
-				if(location.getNorthWest().getHeldObject() == null){
-					location.getNorthWest().setHeldObject(location.getHeldObject());
-					location = location.getNorthWest();
-					current.setHeldObject(null);
-					movementLeft = movementLeft - 1;
+				if(location.getNorthWest().getTerrain() != "mountain"){
+					if(location.getNorthWest().getHeldObject() == null){
+						location.getNorthWest().setHeldObject(location.getHeldObject());
+						location = location.getNorthWest();
+						current.setHeldObject(null);
+						movementLeft = movementLeft - 1;
+					}
 				}
 			}
 		}
+		else{System.out.println("lol no moves");}
+		if(movementLeft == 0){
+			canMove = false;
+			System.out.println("movement = 0");
+		}
 	}
 
-	protected void attackUnit(){
+	public void attackUnit(Unit attacker, Unit defender){
 
 	}
 
-	protected void attackCity(Unit attacker,City defender){
+	public void attackCity(Unit attacker,City defender){
 
 	}
 
@@ -92,7 +112,7 @@ public class Unit {
 			}
 		}
 	}
-//change these to have a loction to know what is in the held item, to then work out the damage values
+	//change these to have a loction to know what is in the held item, to then work out the damage values
 	protected void calculateDamage(Unit attacker,City defender){
 		if (attacker.getAttack() > defender.getDefence()){
 			defender.setHealth((defender.getHealth()-(attacker.getAttack()-defender.getDefence())));
@@ -124,6 +144,19 @@ public class Unit {
 	}
 	private boolean getMelee(){
 		return melee;
+	}
+
+	public String getType(){
+		return type;
+	}
+	public Player getPlayer(){
+		return player;
+	}
+	public int getMovementLeft(){
+		return movementLeft;
+	}
+	public static int getProductionCost(){
+		return produceCost;
 	}
 
 }
